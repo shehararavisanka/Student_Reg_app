@@ -1,0 +1,104 @@
+<div class="container">
+
+    <h2>Student Registration Form</h2>
+    <div>
+        <br>
+        <br>
+        <div class="form-group row">
+            <input type="text" [(ngModel)]="custsearch" class="form-control form-control-sm row-3"
+                placeholder="Search Here.." style="width: 250px;margin-left: 30px;" id="custsearch" name="custsearch"
+                autocomplete="off" required="required">
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col">
+                <div [ngClass]="{'clzopenview': optionStatus==1, 'clzcloseview': optionStatus==2 }">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Nic</th>
+                                <th scope="col"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let stlist of oStudentList |filter:custsearch ;let indexOfelement=index;"
+                                style="font-size: small;" (click)="onClickrow(stlist)">
+
+                                <td> {{stlist.regNo}} </td>
+                                <td> {{stlist.firstName}} </td>
+                                <td> {{stlist.lastName}} </td>
+                                <td> {{stlist.mobile}} </td>
+                                <td> {{stlist.email}} </td>
+                                <td> {{stlist.nic}} </td>
+                                <td class="ctda">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </td>
+                                <td class="ctda">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </td>
+                                <td class="ctda">
+
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col" *ngIf="optionStatus==2">
+                <div >
+                    <H2>Student Details</H2>
+                    <br>  
+                  
+                    <br>  
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="../../../assets/personimg.png" style="width: 150px;">
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" [(ngModel)]="oStudentds.firstName" class="form-control form-control-sm row-3"   placeholder="First Name"  >
+                            <br>  
+                            <input type="text" [(ngModel)]="oStudentds.lastName" class="form-control form-control-sm row-3"   placeholder="Last Name"  >
+                            <br>  
+                            <input type="text" [(ngModel)]="oStudentds.mobile" class="form-control form-control-sm row-3"   placeholder="Mobile Number"  >
+                        </div>
+                    </div>
+                 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" [(ngModel)]="oStudentds.email" class="form-control form-control-sm row-3"   placeholder="Email Address"  >
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" [(ngModel)]="oStudentds.nic" class="form-control form-control-sm row-3"   placeholder="NIC Number"  >
+                        </div>
+                    </div>
+                    <br>   
+                    <div class="row">
+                        <div class="col-md-6">
+                           
+                        </div>
+                        <div class="col-md-6">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+</div>
