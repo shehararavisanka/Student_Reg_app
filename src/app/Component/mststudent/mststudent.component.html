@@ -9,7 +9,10 @@
                 placeholder="Search Here.." style="width: 250px;margin-left: 30px;" id="custsearch" name="custsearch"
                 autocomplete="off" required="required">
         </div>
+
         <br>
+        
+        <button type="button" class="btn btn-warning" (click)="onClickCreate()" >Create Student</button>
         <br>
         <div class="row">
             <div class="col">
@@ -28,8 +31,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let stlist of oStudentList |filter:custsearch ;let indexOfelement=index;"
-                                style="font-size: small;" (click)="onClickrow(stlist)">
+                            <tr *ngFor="let stlist of oStudentList|filter:custsearch  | paginate: { itemsPerPage: 10, currentPage: currpg, id:'pagination1'}  "
+                                style="font-size: small;">
 
                                 <td> {{stlist.regNo}} </td>
                                 <td> {{stlist.firstName}} </td>
@@ -37,61 +40,42 @@
                                 <td> {{stlist.mobile}} </td>
                                 <td> {{stlist.email}} </td>
                                 <td> {{stlist.nic}} </td>
-                                <td class="ctda">
+                                <td class="ctda" (click)="onClickrow(stlist,'View')">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                 </td>
-                                <td class="ctda">
+                                <td class="ctda" (click)="onClickrow(stlist,'Update')">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </td>
-                                <td class="ctda">
+                                <td class="ctda" (click)="onClickrow(stlist,'Delete')">
 
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    <i class="fa fa-trash-o" aria-hidden="true" data-toggle="modal"
+                                        data-target="#exampleModalCenter"> </i>
                                 </td>
 
                             </tr>
 
                         </tbody>
                     </table>
+                    <div class="row">
+
+                        <pagination-controls  id="pagination1" (pageChange)="currpg = $event"
+                        
+                       
+                        previousLabel="Previous"
+                        nextLabel="Next"
+                        screenReaderPaginationLabel="Pagination"
+                        screenReaderPageLabel="page"
+                        screenReaderCurrentLabel="You're on page"
+                        ></pagination-controls>
+
+                    </div>
                 </div>
             </div>
             <div class="col" *ngIf="optionStatus==2">
-                <div >
-                    <H2>Student Details</H2>
-                    <br>  
-                  
-                    <br>  
-                    <div class="row">
-                        <div class="col-md-6">
-                            <img src="../../../assets/personimg.png" style="width: 150px;">
-                          
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" [(ngModel)]="oStudentds.firstName" class="form-control form-control-sm row-3"   placeholder="First Name"  >
-                            <br>  
-                            <input type="text" [(ngModel)]="oStudentds.lastName" class="form-control form-control-sm row-3"   placeholder="Last Name"  >
-                            <br>  
-                            <input type="text" [(ngModel)]="oStudentds.mobile" class="form-control form-control-sm row-3"   placeholder="Mobile Number"  >
-                        </div>
-                    </div>
-                 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" [(ngModel)]="oStudentds.email" class="form-control form-control-sm row-3"   placeholder="Email Address"  >
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" [(ngModel)]="oStudentds.nic" class="form-control form-control-sm row-3"   placeholder="NIC Number"  >
-                        </div>
-                    </div>
-                    <br>   
-                    <div class="row">
-                        <div class="col-md-6">
-                           
-                        </div>
-                        <div class="col-md-6">
-                            
-                        </div>
-                    </div>
-                </div>
+
+                <app-viewstudent [oStudentds]="oStudentds" [btnOption]="optionType"></app-viewstudent>
+
+
             </div>
 
 

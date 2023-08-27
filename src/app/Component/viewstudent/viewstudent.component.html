@@ -1,0 +1,47 @@
+<div>
+    <H2>Student Details</H2>
+    <br>
+
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="../../../assets/personimg.png" style="width: 150px;">
+
+        </div>
+        <div class="col-md-6">
+            <input type="text" [(ngModel)]="oStudentds.firstName" [disabled]="btnOption=='View' || btnOption=='Delete'"
+                class="form-control form-control-sm row-3" placeholder="First Name">
+            <br>
+            <input type="text" [(ngModel)]="oStudentds.lastName" [disabled]="btnOption=='View' || btnOption=='Delete'"
+                class="form-control form-control-sm row-3" placeholder="Last Name">
+            <br>
+            <input type="text" [(ngModel)]="oStudentds.mobile" [disabled]="btnOption=='View' || btnOption=='Delete'"
+                class="form-control form-control-sm row-3" placeholder="Mobile Number">
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6">
+            <input type="email" [(ngModel)]="oStudentds.email" [disabled]="btnOption=='View' || btnOption=='Delete'"  class="form-control form-control-sm row-3"
+                placeholder="Email Address">
+        </div>
+        <div class="col-md-6">
+            <input type="text" [(ngModel)]="oStudentds.nic" [disabled]="btnOption=='View' || btnOption=='Delete'" class="form-control form-control-sm row-3"
+                placeholder="NIC Number">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+
+            <button type="button" class="btn btn-warning" (click)="onClickclose()">Close</button>
+            <button type="button" class="btn btn-success" style="margin-left: 10px;"
+                (click)="onClickoption()">{{btnOption}}</button>
+        </div>
+    </div>
+</div>
