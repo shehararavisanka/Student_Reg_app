@@ -1,0 +1,175 @@
+USE [StudentManagment]
+GO
+/****** Object:  Table [dbo].[MstStudents]    Script Date: 8/28/2023 12:52:31 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MstStudents](
+	[Id] [uniqueidentifier] NULL,
+	[FirstName] [nvarchar](70) NULL,
+	[LastName] [nvarchar](70) NULL,
+	[Mobile] [nvarchar](15) NULL,
+	[Email] [nvarchar](50) NULL,
+	[Nic] [nvarchar](15) NULL,
+	[IsDelete] [int] NULL,
+	[CreatedDate] [datetime2](7) NULL,
+	[CreatedBy] [nvarchar](50) NULL,
+	[RegNo] [int] IDENTITY(1,1) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[MstStudents] ADD  CONSTRAINT [DF_MstStudents_IsDelete]  DEFAULT ((0)) FOR [IsDelete]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_MstStudent_CreateorUpdate]    Script Date: 8/28/2023 12:52:31 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+ 
+CREATE PROCEDURE  [dbo].[SP_MstStudent_CreateorUpdate]
+@id uniqueidentifier,
+@regno int,
+@fName nvarchar(70),
+@lName nvarchar(70),
+@mob nvarchar(15),
+@email nvarchar(70),
+@nic nvarchar(15),	 
+@typ int
+AS
+BEGIN
+/* if type is 1 its  going to create and type is else its going to update*/
+if @typ=0
+begin
+
+
+
+INSERT INTO [dbo].[MstStudents]
+           ([Id]
+            
+           ,[FirstName]
+           ,[LastName]
+           ,[Mobile]
+           ,[Email]
+           ,[Nic]
+           ,[IsDelete]
+           ,[CreatedDate]
+           )
+     VALUES
+           (newid()
+            ,@fName,@lName,@mob,@email,@nic,0, GETDATE() ) ;
+ 
+ end
+else if @typ=1
+
+
+
+UPDATE [dbo].[MstStudents]
+   SET  
+       
+      [FirstName] = @fName
+      ,[LastName] =  @lName
+      ,[Mobile] =  @mob
+      ,[Email] =  @email
+      ,[Nic] =  @nic
+   
+      
+ WHERE [Id]=@id;
+ 
+ else
+ /*soft delete by the system*/
+
+ UPDATE [dbo].[MstStudents]
+   SET  
+       [IsDelete]=1 
+   
+      
+ WHERE [Id]=@id;
+
+
+
+
+
+  
+
+	 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_MstStudent_Delete]    Script Date: 8/28/2023 12:52:31 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE  [dbo].[SP_MstStudent_Delete]
+@id int 
+AS
+BEGIN
+ 
+
+ 
+
+UPDATE [dbo].[MstStudents]
+   SET  
+       [IsDelete]=1 
+   
+      
+ WHERE RegNo=@id;
+
+
+  
+
+	 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_MstStudent_SelectAll]    Script Date: 8/28/2023 12:52:31 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+ 
+CREATE PROCEDURE  [dbo].[SP_MstStudent_SelectAll]
+ 
+AS
+BEGIN
+ /*load not deleted students*/
+
+  SELECT   [Id]
+      ,[RegNo]
+      ,[FirstName]
+      ,[LastName]
+      ,[Mobile]
+      ,[Email]
+      ,[Nic] 
+  FROM  [dbo].[MstStudents] where [IsDelete] =0 ;
+  
+
+	 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_MstStudent_SelectById]    Script Date: 8/28/2023 12:52:31 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE PROCEDURE  [dbo].[SP_MstStudent_SelectById]
+@id uniqueidentifier 
+AS
+BEGIN
+ 
+
+  SELECT   [Id]
+      ,[RegNo]
+      ,[FirstName]
+      ,[LastName]
+      ,[Mobile]
+      ,[Email]
+      ,[Nic] 
+  FROM  [dbo].[MstStudents] where  [Id] =@id ;
+  
+
+	 
+END
+GO

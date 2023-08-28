@@ -1,0 +1,91 @@
+<div class="container">
+
+    <h2>Student Registration Form</h2>
+    <div>
+        <br>
+        <br>
+        <div class="form-group row">
+            <input type="text" [(ngModel)]="custsearch" class="form-control form-control-sm row-3"
+                placeholder="Search Here.." style="width: 250px;margin-left: 30px;" id="custsearch" name="custsearch"
+                autocomplete="off" required="required">
+        </div>
+
+        <br>
+        
+        <button type="button" class="btn btn-warning" (click)="onClickCreate()" >Create Student</button>
+        <br>
+        <div class="row">
+            <div class="col">
+                <div [ngClass]="{'clzopenview': optionStatus==1, 'clzcloseview': optionStatus==2 }">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Nic</th>
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let stlist of oStudentList|filter:custsearch  | paginate: { itemsPerPage: 10, currentPage: currpg, id:'pagination1'} ;let indexOfelement=index; "
+                                style="font-size: small;"    
+                                
+                                >
+
+                                <td  (click)="onClickrow(stlist,'View')"   [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'"
+                              > {{stlist.regNo}} </td>
+                                <td  (click)="onClickrow(stlist,'View')"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'">  {{stlist.firstName}} </td>
+                                <td  (click)="onClickrow(stlist,'View')"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'"> {{stlist.lastName}} </td>
+                                <td  (click)="onClickrow(stlist,'View')"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'">  {{stlist.mobile}} </td>
+                                <td  (click)="onClickrow(stlist,'View')"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'"> {{stlist.email}} </td>
+                                <td  (click)="onClickrow(stlist,'View')"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'"> {{stlist.nic}} </td>
+                                <td class="ctda" (click)="onClickrow(stlist,'View')"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </td>
+                                <td class="ctda" (click)="onClickrow(stlist,'Update')"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </td>
+                                <td class="ctda" (click)="onClickrow(stlist,'Delete')"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'">
+
+                                    <i class="fa fa-trash-o" aria-hidden="true" data-toggle="modal"  [ngClass]="stlist.isSelected == 1 ? 'selected' : 'notselected'"
+                                        data-target="#exampleModalCenter"> </i>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="row">
+
+                        <pagination-controls  id="pagination1" (pageChange)="currpg = $event"
+                        
+                       
+                        previousLabel="Previous"
+                        nextLabel="Next"
+                        screenReaderPaginationLabel="Pagination"
+                        screenReaderPageLabel="page"
+                        screenReaderCurrentLabel="You're on page"
+                        ></pagination-controls>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col" *ngIf="optionStatus==2">
+
+                <app-viewstudent [oStudentds]="oStudentds" [btnOption]="optionType"></app-viewstudent>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+</div>

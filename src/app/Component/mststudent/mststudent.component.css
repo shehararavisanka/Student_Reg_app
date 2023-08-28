@@ -1,0 +1,21 @@
+.ctda:hover {
+    background-color: rgb(153, 198, 219);
+  }
+  .clzopenview{
+
+    width: 100%;
+
+  }
+  .clzcloseview{
+    width: 50%;
+
+
+    
+  }
+.notselected{
+  background-color: #ffffff; 
+}
+  .selected{
+    background-color: #c0dba3;
+    color: rgb(0, 0, 0);
+  }
