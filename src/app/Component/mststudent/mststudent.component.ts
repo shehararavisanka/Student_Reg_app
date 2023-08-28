@@ -23,136 +23,8 @@ export class MststudentComponent {
   }
 
   ngOnInit(): void {
-
-    this.oStudentList.push({
-      regNo: 1,
-      firstName: 'Shehara',
-      lastName: 'Ravisanka',
-      mobile: '0702263854',
-      email: 'sheharavisanka@gmail.com',
-      nic: '981461320V',
-    })
-
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
-    this.oStudentList.push({
-      regNo: 2,
-      firstName: 'Nuwanthi',
-      lastName: 'Jayawickrama',
-      mobile: '0702263854',
-      email: 'nimesha@gmail.com',
-      nic: '98150256320V',
-    })
+ 
+    this.onLoadStuDetails();
 
   }
 
@@ -170,6 +42,10 @@ export class MststudentComponent {
   }
 
   onLoadStuDetails() {
+    this.stuService.getstudentall().subscribe(ret=>{
+      console.log(ret);
+      this.oStudentList=ret;
+    })
 
   }
 
@@ -186,9 +62,22 @@ export class MststudentComponent {
     } else {
       this.optionStatus = 1;
     }
+ 
+
+    this.onRowChangecolor(_stlist.regNo);
 
   }
+  onRowChangecolor(_regNo:Number){
+    this.oStudentList.map(x=>x.isSelected=0);
+    this.oStudentList.find(x => {
+      if(x.regNo == _regNo){
+        console.log(x.regNo)
+        x.isSelected=1;
+      }
+    });   
+  }
   onClickCreate(){
+    this.optionType="Create";
     this.optionStatus = 2;
     this.oStudentds = new StudentList();;
   }

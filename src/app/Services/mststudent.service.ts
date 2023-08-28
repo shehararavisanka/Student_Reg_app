@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { StudentComDetails } from '../Models/studenlist';
+import { Observable, Subject } from 'rxjs';
+import { StudentComDetails, StudentList, StudentListDetail } from '../Models/studenlist';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,7 @@ export class MststudentService {
   _studentComdetails$ = this._studentComdetails.asObservable();
 
 
-
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
 
@@ -20,5 +20,17 @@ export class MststudentService {
     this._studentComdetails.next(_studentDet);
   }
 
+  createstudent(data: StudentList) {
+    return this.http.post('/api/values', data);
 
+  }
+
+  deletestudent(data: StudentList) {
+    return this.http.post('/api/values' ,data);
+
+  }
+  getstudentall() {
+    
+    return this.http.get<StudentListDetail[]>('api/values' );
+  }
 }

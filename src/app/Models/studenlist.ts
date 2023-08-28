@@ -1,4 +1,5 @@
 export class StudentList {
+  Id:string="";
   regNo: Number = 0;
   firstName: string = '';
   lastName: string = '';
@@ -16,6 +17,7 @@ export class StudentListDetail {
   mobile: string = '';
   email: string = '';
   nic: string = '';
+  isSelected :Number=0
 
   constructor(_regNo: Number, _firstName: string, _lastName: string, _mobile: string, _email: string, _nic: string) {
     this.regNo = _regNo

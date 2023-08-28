@@ -9,9 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ViewstudentComponent } from './Component/viewstudent/viewstudent.component';  
-
+ 
 import {NgxPaginationModule} from 'ngx-pagination';
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +21,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, FormsModule     ,HttpClientModule,Ng2SearchPipeModule,NgxPaginationModule
-    
+    AppRoutingModule, FormsModule     ,HttpClientModule,Ng2SearchPipeModule,NgxPaginationModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
